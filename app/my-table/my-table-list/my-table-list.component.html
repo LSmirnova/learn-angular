@@ -1,0 +1,45 @@
+<form (submit)="addItem(newId, newName, newPrice, newCategory)">
+    <input type="number" placeholder="id" name="id" [(ngModel)]="newId">
+    <input type="text" placeholder="name" name="name" [(ngModel)]="newName">
+    <input type="number" placeholder="price" name="price" [(ngModel)]="newPrice">
+    <select (change)="update($event.target.value)">
+        <option *ngFor="let category of categoryItem" [ngValue]="category.value">{{category.value}}</option>
+    </select>
+
+    <button>Add</button>
+</form>
+<hr>
+
+<select (change)="sort($event.target.value)">
+    <option *ngFor="let category of categoryArray" value="{{category.value}}"
+    >{{category.value}}</option>
+</select>
+
+<table class="table table-striped">
+
+<thead>
+
+<tr>
+    <th>Номер</th>
+    <th>Название</th>
+    <th>Цена</th>
+    <th></th>
+</tr>
+</thead>
+<tbody>
+    <tr *ngFor = "let item of product" [class.red]="item.price > 500">
+        <td>{{item.id}}</td>
+        <td>{{item.name}}</td>
+        <td>{{item.price}}</td>
+        <td>{{item.category}}</td>
+        <td><button (click)="onDelete(item)">Delete</button></td>
+    </tr>
+</tbody>
+</table>
+
+<label for="row">Введите количество выводимых строк</label>
+<div>
+    <input type="number" id="row" [(ngModel)]="row">
+    <button (click)="reTable()">Перестроить</button>
+</div>
+
